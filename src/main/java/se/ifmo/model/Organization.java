@@ -1,0 +1,39 @@
+package se.ifmo.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Check;
+
+@Entity
+@Getter
+@Setter
+public class Organization {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+
+    @Column(nullable = false)
+    @Check(constraints = "length(name) > 0")
+    private String name; //Поле не может быть null, Строка не может быть пустой
+
+    @JoinColumn(name = "address_id", nullable = false)
+    @ManyToOne
+    private Address officialAddress; //Поле не может быть null
+
+    @Column(nullable = false)
+    @Check(constraints = "length(annual_turnover) > 0")
+    private Integer annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
+
+    @Check(constraints = "employeesCount > 0")
+    private long employeesCount; //Значение поля должно быть больше 0
+
+    @Column(nullable = false, length = 1789)
+    private String fullName; //Длина строки не должна быть больше 1789, Поле не может быть null
+
+    @Check(constraints = "length(rating) > 0")
+    private int rating; //Значение поля должно быть больше 0
+
+    @Enumerated(EnumType.STRING)
+    private OrganizationType type; //Поле может быть null
+}

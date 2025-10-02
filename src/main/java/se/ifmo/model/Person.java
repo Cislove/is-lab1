@@ -1,0 +1,38 @@
+package se.ifmo.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Check;
+
+import java.util.Date;
+
+@Entity
+@Getter
+@Setter
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    @Check(constraints = "length(name) > 0")
+    private String name; //Поле не может быть null, Строка не может быть пустой
+
+    @Enumerated(EnumType.STRING)
+    private Color eyeColor; //Поле может быть null
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Color hairColor; //Поле не может быть null
+
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "location_id")
+    private Location location; //Поле не может быть null
+
+    private Date birthday; //Поле может быть null
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Country nationality; //Поле не может быть null
+}
