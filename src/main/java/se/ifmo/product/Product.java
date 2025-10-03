@@ -1,17 +1,22 @@
-package se.ifmo.model;
+package se.ifmo.product;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
+import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.model.Coordinates;
+import se.ifmo.model.Organization;
+import se.ifmo.model.Person;
+import se.ifmo.model.UnitOfMeasure;
 
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class Product {
+public class Product implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически

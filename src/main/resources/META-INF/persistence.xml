@@ -3,7 +3,7 @@
     <persistence-unit name="myPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>se.ifmo.model.Product</class>
+        <class>se.ifmo.product.Product</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
