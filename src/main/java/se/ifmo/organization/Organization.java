@@ -29,7 +29,7 @@ public class Organization implements AbstractEntity {
     @Check(constraints = "length(annual_turnover) > 0")
     private Integer annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
 
-    @Check(constraints = "employeesCount > 0")
+    @Check(constraints = "employees_count > 0")
     private long employeesCount; //Значение поля должно быть больше 0
 
     @Column(nullable = false, length = 1789)
