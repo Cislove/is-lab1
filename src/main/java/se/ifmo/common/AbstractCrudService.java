@@ -1,6 +1,8 @@
 package se.ifmo.common;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import se.ifmo.notification.NotificationService;
 import se.ifmo.common.placemark.AbstractEntity;
 import se.ifmo.common.placemark.AbstractRepository;
 import se.ifmo.common.placemark.Dto;
@@ -18,10 +20,13 @@ public abstract class AbstractCrudService <
 
     private final TRepository repository;
     private final TMapper mapper;
+    @Autowired
+    private NotificationService notificationService;
 
     //TODO: прописать кастомные исключения
     public TDto getById(TId id){
-        return mapper.toDto(repository.findById(id).orElseThrow(RuntimeException::new));
+        var dto = repository.findById(id).orElseThrow(RuntimeException::new);
+        return mapper.toDto(dto);
     }
 
     public List<TDto> getAll(){
@@ -32,7 +37,9 @@ public abstract class AbstractCrudService <
     }
 
     public void create(TDto dto){
-        repository.save(mapper.toEntity(dto));
+        TEntity entity = mapper.toEntity(dto);
+        repository.save(entity);
+        notificationService.sendNotification(dto);
     }
 
     public void update(TDto dto){

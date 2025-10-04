@@ -16,6 +16,6 @@ public class Coordinates implements AbstractEntity {
 
     private double x;
 
-    @Check(constraints = "length(y) > -718")
+    @Check(constraints = "y > -718")
     private float y; //Значение поля должно быть больше -718
 }

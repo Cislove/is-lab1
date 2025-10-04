@@ -26,7 +26,7 @@ public class Organization implements AbstractEntity {
     private Address officialAddress; //Поле не может быть null
 
     @Column(nullable = false)
-    @Check(constraints = "length(annual_turnover) > 0")
+    @Check(constraints = "annual_turnover > 0")
     private Integer annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
 
     @Check(constraints = "employees_count > 0")
@@ -35,7 +35,7 @@ public class Organization implements AbstractEntity {
     @Column(nullable = false, length = 1789)
     private String fullName; //Длина строки не должна быть больше 1789, Поле не может быть null
 
-    @Check(constraints = "length(rating) > 0")
+    @Check(constraints = "rating > 0")
     private int rating; //Значение поля должно быть больше 0
 
     @Enumerated(EnumType.STRING)
