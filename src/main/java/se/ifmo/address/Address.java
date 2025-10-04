@@ -13,7 +13,7 @@ import se.ifmo.location.Location;
 public class Address implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(length = 83)
     private String street; //Длина строки не должна быть больше 83, Поле может быть null

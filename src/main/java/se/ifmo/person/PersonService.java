@@ -1,5 +1,6 @@
 package se.ifmo.person;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
@@ -9,9 +10,9 @@ public class PersonService extends AbstractCrudService<
         PersonRepository,
         PersonDto,
         PersonMapper,
-        Long
+        Integer
         > {
-    public PersonService(PersonRepository repository, PersonMapper mapper) {
+    public PersonService(PersonRepository repository, @Qualifier("personMapperImpl") PersonMapper mapper) {
         super(repository, mapper);
     }
 }

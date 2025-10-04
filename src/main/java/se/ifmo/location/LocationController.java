@@ -8,7 +8,7 @@ import se.ifmo.common.AbstractCrudController;
 @RequestMapping("api/v1/location")
 public class LocationController extends AbstractCrudController<
         LocationDto,
-        Long,
+        Integer,
         LocationService
         >{
 

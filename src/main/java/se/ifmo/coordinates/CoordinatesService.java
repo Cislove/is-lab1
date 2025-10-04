@@ -1,5 +1,6 @@
 package se.ifmo.coordinates;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
@@ -9,11 +10,13 @@ public class CoordinatesService extends AbstractCrudService<
         CoordinatesRepository,
         CoordinatesDto,
         CoordinatesMapper,
-        Long
-        >{
+        Integer
+        > {
 
 
-    public CoordinatesService(CoordinatesRepository repository, CoordinatesMapper mapper) {
+    public CoordinatesService(CoordinatesRepository repository,
+                              @Qualifier("coordinatesMapperImpl") CoordinatesMapper mapper) {
+
         super(repository, mapper);
     }
 }

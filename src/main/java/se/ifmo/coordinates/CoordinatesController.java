@@ -8,7 +8,7 @@ import se.ifmo.common.AbstractCrudController;
 @RequestMapping("api/v1/coordinates")
 public class CoordinatesController extends AbstractCrudController<
         CoordinatesDto,
-        Long,
+        Integer,
         CoordinatesService
         > {
 

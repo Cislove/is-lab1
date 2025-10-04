@@ -5,15 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 import se.ifmo.common.placemark.AbstractEntity;
 
-import java.io.Serializable;
-
 @Entity
 @Getter
 @Setter
 public class Location implements AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private float x;
 

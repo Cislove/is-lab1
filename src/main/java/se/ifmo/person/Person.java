@@ -17,7 +17,7 @@ import java.util.Date;
 public class Person implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     @Check(constraints = "length(name) > 0")

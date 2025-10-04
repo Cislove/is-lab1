@@ -1,5 +1,6 @@
 package se.ifmo.address;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
@@ -9,10 +10,10 @@ public class AddressService extends AbstractCrudService<
         AddressRepository,
         AddressDto,
         AddressMapper,
-        Long
+        Integer
         >{
 
-    public AddressService(AddressRepository repository, AddressMapper mapper) {
+    public AddressService(AddressRepository repository, @Qualifier("addressMapperImpl") AddressMapper mapper) {
         super(repository, mapper);
     }
 }

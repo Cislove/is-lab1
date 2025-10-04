@@ -8,7 +8,7 @@ import se.ifmo.common.AbstractCrudController;
 @RequestMapping("api/v1/address")
 public class AddressController extends AbstractCrudController<
         AddressDto,
-        Long,
+        Integer,
         AddressService
         >{
 

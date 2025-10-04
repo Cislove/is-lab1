@@ -8,7 +8,7 @@ import se.ifmo.common.AbstractCrudController;
 @RequestMapping("api/v1/person")
 public class PersonController extends AbstractCrudController<
         PersonDto,
-        Long,
+        Integer,
         PersonService
         > {
     public PersonController(PersonService service) {

@@ -12,7 +12,7 @@ import se.ifmo.common.placemark.AbstractEntity;
 public class Coordinates implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private double x;
 

@@ -1,5 +1,6 @@
 package se.ifmo.location;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
@@ -9,10 +10,10 @@ public class LocationService extends AbstractCrudService<
         LocationRepository,
         LocationDto,
         LocationMapper,
-        Long
+        Integer
         >{
 
-    public LocationService(LocationRepository repository, LocationMapper mapper) {
+    public LocationService(LocationRepository repository, @Qualifier("locationMapperImpl") LocationMapper mapper) {
         super(repository, mapper);
     }
 }
