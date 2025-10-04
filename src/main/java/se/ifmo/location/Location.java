@@ -1,13 +1,16 @@
-package se.ifmo.model;
+package se.ifmo.location;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import se.ifmo.common.placemark.AbstractEntity;
+
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
-public class Location {
+public class Location implements AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

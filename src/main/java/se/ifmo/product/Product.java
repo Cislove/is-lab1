@@ -6,9 +6,9 @@ import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
 import se.ifmo.common.placemark.AbstractEntity;
-import se.ifmo.model.Coordinates;
-import se.ifmo.model.Organization;
-import se.ifmo.model.Person;
+import se.ifmo.coordinates.Coordinates;
+import se.ifmo.organization.Organization;
+import se.ifmo.person.Person;
 import se.ifmo.model.UnitOfMeasure;
 
 import java.util.Date;

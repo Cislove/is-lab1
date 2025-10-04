@@ -1,16 +1,20 @@
-package se.ifmo.model;
+package se.ifmo.person;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
+import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.model.Color;
+import se.ifmo.model.Country;
+import se.ifmo.location.Location;
 
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class Person {
+public class Person implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

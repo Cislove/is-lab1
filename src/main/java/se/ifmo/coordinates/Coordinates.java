@@ -1,14 +1,15 @@
-package se.ifmo.model;
+package se.ifmo.coordinates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
+import se.ifmo.common.placemark.AbstractEntity;
 
 @Entity
 @Getter
 @Setter
-public class Coordinates {
+public class Coordinates implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
