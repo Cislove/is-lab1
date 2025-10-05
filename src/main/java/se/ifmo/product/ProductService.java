@@ -1,5 +1,6 @@
 package se.ifmo.product;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
@@ -12,7 +13,12 @@ public class ProductService extends AbstractCrudService <
         Integer
         > {
 
-    public ProductService(ProductRepository repository, ProductMapper mapper) {
+    public ProductService(ProductRepository repository, @Qualifier("productMapperImpl") ProductMapper mapper) {
         super(repository, mapper);
+    }
+
+    @Override
+    public String getEntityName() {
+        return "product";
     }
 }

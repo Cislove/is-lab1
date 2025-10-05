@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
-import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.common.AbstractEntity;
 import se.ifmo.model.Color;
 import se.ifmo.model.Country;
 import se.ifmo.location.Location;
@@ -39,4 +39,9 @@ public class Person implements AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Country nationality; //Поле не может быть null
+
+    @Override
+    public String getStringId() {
+        return String.valueOf(id);
+    }
 }

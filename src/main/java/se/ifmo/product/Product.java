@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
-import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.common.AbstractEntity;
 import se.ifmo.coordinates.Coordinates;
 import se.ifmo.organization.Organization;
 import se.ifmo.person.Person;
@@ -54,4 +54,9 @@ public class Product implements AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person owner; //Поле может быть null
+
+    @Override
+    public String getStringId() {
+        return String.valueOf(id);
+    }
 }

@@ -16,4 +16,9 @@ public class OrganizationService extends AbstractCrudService<
     public OrganizationService(OrganizationRepository repository, @Qualifier("organizationMapperImpl") OrganizationMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public String getEntityName() {
+        return "organization";
+    }
 }

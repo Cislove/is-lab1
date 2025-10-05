@@ -16,4 +16,9 @@ public class AddressService extends AbstractCrudService<
     public AddressService(AddressRepository repository, @Qualifier("addressMapperImpl") AddressMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public String getEntityName() {
+        return "address";
+    }
 }

@@ -19,4 +19,9 @@ public class CoordinatesService extends AbstractCrudService<
 
         super(repository, mapper);
     }
+
+    @Override
+    public String getEntityName() {
+        return "coordinates";
+    }
 }

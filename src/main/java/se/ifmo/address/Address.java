@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
-import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.common.AbstractEntity;
 import se.ifmo.location.Location;
 
 @Entity
@@ -25,4 +25,9 @@ public class Address implements AbstractEntity {
     @ManyToOne
     @JoinColumn(nullable = false, name = "location_id")
     private Location town; //Поле не может быть null
+
+    @Override
+    public String getStringId() {
+        return String.valueOf(id);
+    }
 }

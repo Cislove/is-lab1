@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class AbstractCrudController<
         TDto extends Dto,
-        TId,
+        TId extends Number,
         TService extends AbstractCrudService<?, ?, TDto, ?, TId>
         > {
 

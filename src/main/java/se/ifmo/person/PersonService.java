@@ -15,4 +15,9 @@ public class PersonService extends AbstractCrudService<
     public PersonService(PersonRepository repository, @Qualifier("personMapperImpl") PersonMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public String getEntityName() {
+        return "person";
+    }
 }

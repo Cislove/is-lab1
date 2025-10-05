@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Check;
 import se.ifmo.address.Address;
-import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.common.AbstractEntity;
 import se.ifmo.model.OrganizationType;
-import se.ifmo.person.Person;
 
 @Entity
 @Getter
@@ -40,4 +39,9 @@ public class Organization implements AbstractEntity {
 
     @Enumerated(EnumType.STRING)
     private OrganizationType type; //Поле может быть null
+
+    @Override
+    public String getStringId() {
+        return String.valueOf(id);
+    }
 }

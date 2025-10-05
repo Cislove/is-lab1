@@ -3,7 +3,7 @@ package se.ifmo.location;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import se.ifmo.common.placemark.AbstractEntity;
+import se.ifmo.common.AbstractEntity;
 
 @Entity
 @Getter
@@ -20,4 +20,9 @@ public class Location implements AbstractEntity{
 
     @Column(nullable = false)
     private Long z; //Поле не может быть null
+
+    @Override
+    public String getStringId() {
+        return String.valueOf(id);
+    }
 }

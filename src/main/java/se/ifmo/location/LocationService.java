@@ -16,4 +16,9 @@ public class LocationService extends AbstractCrudService<
     public LocationService(LocationRepository repository, @Qualifier("locationMapperImpl") LocationMapper mapper) {
         super(repository, mapper);
     }
+
+    @Override
+    public String getEntityName() {
+        return "location";
+    }
 }
