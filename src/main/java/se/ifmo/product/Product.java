@@ -16,7 +16,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Product implements AbstractEntity {
+public class Product implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически

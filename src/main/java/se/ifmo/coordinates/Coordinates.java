@@ -9,7 +9,7 @@ import se.ifmo.common.AbstractEntity;
 @Entity
 @Getter
 @Setter
-public class Coordinates implements AbstractEntity {
+public class Coordinates implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

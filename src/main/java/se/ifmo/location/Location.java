@@ -8,7 +8,7 @@ import se.ifmo.common.AbstractEntity;
 @Entity
 @Getter
 @Setter
-public class Location implements AbstractEntity{
+public class Location implements AbstractEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

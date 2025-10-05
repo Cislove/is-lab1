@@ -14,8 +14,7 @@ public class CoordinatesService extends AbstractCrudService<
         > {
 
 
-    public CoordinatesService(CoordinatesRepository repository,
-                              @Qualifier("coordinatesMapperImpl") CoordinatesMapper mapper) {
+    public CoordinatesService(CoordinatesRepository repository, @Qualifier("coordinatesMapperImpl") CoordinatesMapper mapper) {
 
         super(repository, mapper);
     }

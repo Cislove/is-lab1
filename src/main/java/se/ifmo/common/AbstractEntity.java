@@ -1,5 +1,6 @@
 package se.ifmo.common;
 
-public interface AbstractEntity {
+public interface AbstractEntity<TId> {
     String getStringId();
+    TId getId();
 }

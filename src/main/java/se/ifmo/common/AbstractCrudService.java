@@ -1,16 +1,20 @@
 package se.ifmo.common;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import se.ifmo.common.placemark.AbstractRepository;
 import se.ifmo.common.placemark.Dto;
+import se.ifmo.errors.BadRequestException;
+import se.ifmo.errors.NotFoundException;
 import se.ifmo.notification.NotificationService;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class AbstractCrudService<
-        TEntity extends AbstractEntity,
+        TEntity extends AbstractEntity<TId>,
         TRepository extends AbstractRepository<TEntity, TId>,
         TDto extends Dto,
         TMapper extends GenericMapper<TDto, TEntity>,
@@ -24,7 +28,8 @@ public abstract class AbstractCrudService<
 
     //TODO: прописать кастомные исключения
     public TDto getById(TId id) {
-        var dto = repository.findById(id).orElseThrow(RuntimeException::new);
+        var dto = repository.findById(id).orElseThrow(() ->
+                new NotFoundException("Entity with id: " + id + "not found"));
         return mapper.toDto(dto);
     }
 
@@ -36,24 +41,42 @@ public abstract class AbstractCrudService<
     }
 
     public void create(TDto dto) {
-        TEntity entity = mapper.toEntity(dto);
-        notificationService.sendAddNotification(
-                repository.save(entity).getStringId(),
-                getEntityName());
+        try {
+            TEntity entity = mapper.toEntity(dto);
+            notificationService.sendAddNotification(
+                    repository.save(entity).getStringId(),
+                    getEntityName());
+        }
+        catch (DataIntegrityViolationException | ConstraintViolationException e) {
+            throw new BadRequestException("incorrect field value");
+        }
     }
 
     public void update(TDto dto) {
-        TEntity entity = mapper.toEntity(dto);
-        notificationService.sendUpdateNotification(
-                repository.save(entity).getStringId(),
-                getEntityName());
+        try {
+            TEntity entity = mapper.toEntity(dto);
+            checkIdExists(entity.getId());
+            notificationService.sendUpdateNotification(
+                    repository.save(entity).getStringId(),
+                    getEntityName());
+        }
+        catch (DataIntegrityViolationException | ConstraintViolationException e) {
+            throw new BadRequestException("incorrect field value");
+        }
     }
 
     public void delete(TId id) {
+        checkIdExists(id);
         repository.deleteById(id);
         notificationService.sendDeleteNotification(id.toString(), getEntityName());
     }
 
     //TODO как переработать, хотя бы на конфиг
     public abstract String getEntityName();
+
+    private void checkIdExists(TId id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Entity with id " + id + " not found");
+        }
+    }
 }

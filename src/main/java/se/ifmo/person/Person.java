@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Person implements AbstractEntity {
+public class Person implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

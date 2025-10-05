@@ -10,7 +10,7 @@ import se.ifmo.location.Location;
 @Entity
 @Getter
 @Setter
-public class Address implements AbstractEntity {
+public class Address implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

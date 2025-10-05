@@ -15,4 +15,5 @@ public class ProductController extends AbstractCrudController<
     public ProductController(ProductService service) {
         super(service);
     }
+
 }
