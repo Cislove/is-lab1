@@ -36,6 +36,7 @@ public class EventWebSocketHandler extends TextWebSocketHandler {
             String json = objectMapper.writeValueAsString(new NotificationDto(
                     NotificationDto.NotificationType.ERROR,
                     null,
+                    false,
                     null
             ));
 
