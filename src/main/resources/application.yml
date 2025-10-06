@@ -6,5 +6,26 @@ spring:
     password: mypassword
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+        region:
+          factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        format_sql: true
+      javax:
+        cache:
+          provider: org.ehcache.jsr107.EhcacheCachingProvider
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

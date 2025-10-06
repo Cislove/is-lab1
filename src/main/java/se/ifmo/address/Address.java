@@ -3,6 +3,8 @@ package se.ifmo.address;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Check;
 import se.ifmo.common.AbstractEntity;
 import se.ifmo.location.Location;
@@ -10,6 +12,8 @@ import se.ifmo.location.Location;
 @Entity
 @Getter
 @Setter
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Address implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

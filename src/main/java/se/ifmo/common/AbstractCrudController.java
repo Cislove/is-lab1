@@ -18,13 +18,12 @@ public abstract class AbstractCrudController<
 
     private final TService service;
 
-    //TODO: перейти на батчи
     @GetMapping
-    public Page<TDto> getAll(
-            @RequestParam(defaultValue = "0") int page,
+    public PageDto<TDto> getAll(
+            @RequestParam(defaultValue = "0") int pageNumber,
             @RequestParam(defaultValue = "10") int size) {
 
-        return service.getAll(PageRequest.of(page, size));
+        return mapToPageDto(service.getAll(PageRequest.of(pageNumber, size)));
     }
 
     @GetMapping("/{id}")
@@ -38,13 +37,13 @@ public abstract class AbstractCrudController<
     }
 
     @GetMapping("/search")
-    public Page<TDto> search(
+    public PageDto<TDto> search(
             @RequestParam String field,
             @RequestParam String value,
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "0") int pageNumber,
             @RequestParam(defaultValue = "10") int size) {
 
-        return service.searchByValueInField(field, value, PageRequest.of(page, size));
+        return mapToPageDto(service.searchByValueInField(field, value, PageRequest.of(pageNumber, size)));
     }
 
     @PutMapping
@@ -55,5 +54,14 @@ public abstract class AbstractCrudController<
     @DeleteMapping("/{id}")
     public void delete(@PathVariable TId id) {
         service.delete(id);
+    }
+
+    private PageDto<TDto> mapToPageDto(Page<TDto> page) {
+        return new PageDto<>(
+                page.getContent(),
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements()
+        );
     }
 }
