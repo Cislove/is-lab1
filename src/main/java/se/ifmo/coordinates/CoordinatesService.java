@@ -23,4 +23,5 @@ public class CoordinatesService extends AbstractCrudService<
     public String getEntityName() {
         return "coordinates";
     }
+
 }

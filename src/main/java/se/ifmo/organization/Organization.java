@@ -14,7 +14,7 @@ import se.ifmo.model.OrganizationType;
 public class Organization implements AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private Integer id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
 
     @Column(nullable = false)
     @Check(constraints = "length(name) > 0")

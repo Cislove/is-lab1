@@ -1,6 +1,7 @@
 package se.ifmo.person;
 
 import se.ifmo.common.placemark.Dto;
+import se.ifmo.location.LocationDto;
 import se.ifmo.model.Color;
 import se.ifmo.model.Country;
 
@@ -11,7 +12,7 @@ public record PersonDto(
     String name,
     Color eyeColor,
     Color hairColor,
-    int locationId,
+    LocationDto location,
     Date birthday,
     Country nationality
 ) implements Dto {

@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import se.ifmo.common.AbstractCrudService;
 
+import java.util.Map;
+import java.util.Set;
+
 @Service
 public class PersonService extends AbstractCrudService<
         Person,
@@ -19,5 +22,15 @@ public class PersonService extends AbstractCrudService<
     @Override
     public String getEntityName() {
         return "person";
+    }
+
+    @Override
+    protected Set<String> getAllowedSearchFields() {
+        return Set.of("name");
+    }
+
+    @Override
+    protected Map<String, String> getFieldMapping() {
+        return Map.of("name", "name");
     }
 }

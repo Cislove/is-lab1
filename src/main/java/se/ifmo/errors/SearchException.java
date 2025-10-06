@@ -3,8 +3,8 @@ package se.ifmo.errors;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class NotFoundException extends RuntimeException {
-    public NotFoundException(String message) {
+public class SearchException extends RuntimeException {
+    public SearchException(String message) {
         super(message);
     }
 }
