@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import se.ifmo.common.placemark.AbstractRepository;
 import se.ifmo.common.placemark.Dto;
@@ -31,33 +33,27 @@ public abstract class AbstractCrudService<
     @Autowired
     private NotificationService notificationService;
 
-    //TODO: прописать кастомные исключения
     public TDto getById(TId id) {
         var dto = repository.findById(id).orElseThrow(() ->
                 new NotFoundException("Entity with id: " + id + "not found"));
         return mapper.toDto(dto);
     }
 
-    public List<TDto> searchByValueInField(String field, String value) {
+    public Page<TDto> searchByValueInField(String field, String value, Pageable pageable) {
         validateSearchFields(field);
         try{
             String mappingField = getFieldMapping().get(field);
             Specification<TEntity> spec = createEqualsSpecification(mappingField, value);
 
-            return repository.findAll(spec)
-                    .stream().map(mapper::toDto)
-                    .toList();
+            return repository.findAll(spec, pageable).map(mapper::toDto);
         }
         catch (ConstraintViolationException ex){
             throw new SearchException("Invalid search query: " + ex.getMessage());
         }
     }
 
-    public List<TDto> getAll() {
-        return repository.findAll()
-                .stream()
-                .map(mapper::toDto)
-                .toList();
+    public Page<TDto> getAll(Pageable pageable) {
+        return repository.findAll(pageable).map(mapper::toDto);
     }
 
     public TId create(TDto dto) {
@@ -126,7 +122,7 @@ public abstract class AbstractCrudService<
 
     protected Set<String> getAllowedSearchFields(){
         return Set.of();
-    };
+    }
 
     protected Map<String, String> getFieldMapping(){
         return Map.of();

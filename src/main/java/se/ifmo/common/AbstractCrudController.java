@@ -2,12 +2,12 @@ package se.ifmo.common;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.ifmo.common.placemark.Dto;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class AbstractCrudController<
@@ -20,8 +20,11 @@ public abstract class AbstractCrudController<
 
     //TODO: перейти на батчи
     @GetMapping
-    public List<TDto> getAll() {
-        return service.getAll();
+    public Page<TDto> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        return service.getAll(PageRequest.of(page, size));
     }
 
     @GetMapping("/{id}")
@@ -35,8 +38,13 @@ public abstract class AbstractCrudController<
     }
 
     @GetMapping("/search")
-    public List<TDto> search(@RequestParam String field, @RequestParam String value) {
-        return service.searchByValueInField(field, value);
+    public Page<TDto> search(
+            @RequestParam String field,
+            @RequestParam String value,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        return service.searchByValueInField(field, value, PageRequest.of(page, size));
     }
 
     @PutMapping

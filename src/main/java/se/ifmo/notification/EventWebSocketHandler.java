@@ -1,6 +1,7 @@
 package se.ifmo.notification;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -14,6 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Component
+@Slf4j
 public class EventWebSocketHandler extends TextWebSocketHandler {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
@@ -42,7 +44,7 @@ public class EventWebSocketHandler extends TextWebSocketHandler {
 
             session.sendMessage(new TextMessage(json));
         } catch (IOException e) {
-            //TODO: добавить логгер
+            log.atError().setMessage("Coulnd't send message in websocket input plug: " + e.getMessage()).log();
             throw new RuntimeException(e);
         }
     }
@@ -55,7 +57,7 @@ public class EventWebSocketHandler extends TextWebSocketHandler {
                     .filter(WebSocketSession::isOpen)
                     .forEach(session -> executor.submit(() -> sendMessage(session, json)));
         } catch (IOException e) {
-            //TODO: добавить логгер
+            log.atError().setMessage("Broadcast error: " + e.getMessage()).log();
             throw new RuntimeException(e);
         }
     }
@@ -64,9 +66,8 @@ public class EventWebSocketHandler extends TextWebSocketHandler {
         try {
             session.sendMessage(new TextMessage(message));
         }
-        //TODO: добавить логгер
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            log.atWarn().setMessage("Unable to send message: " + e.getMessage()).log();
         }
     }
 }
